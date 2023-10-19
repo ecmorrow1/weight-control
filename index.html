@@ -12,6 +12,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.4.4/d3.js"></script>
 </head>
 <body>
-    
+
+    <!-- #Jumbotron -->
+    <div class="jumbotron">
+        <h1 class="display-5">Weight Control</h1>
+    </div>
+
+    <!-- <div class="container-fluid col-md-12">
+        <h5></h5>
+        <div class="col-md-6">
+          <select id="selectAirportData" onchange="optionTwoChanged(this.value)"></select>
+          <h5></h5>
+        </div>
+        <div class="col-md-12">
+          <div id="plotArea2" class="panel-body"></div>
+          <br>
+        </div>
+    </div> -->
+
+    <div class="container-fluid col-md-12">
+    <!-- <h5></h5> -->
+    <div class="col-md-12">
+        <select id="selectTripData" onchange="optionOneChanged(this.value)"></select>
+    </div>
+    <div class="col-md-12">
+        <!-- <h5></h5> -->
+        <div id="plotArea" class="panel-body"></div>
+        <br>
+    </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.4.4/d3.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="static/js/app.js"></script>
 </body>
 </html>
