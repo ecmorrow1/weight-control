@@ -1,0 +1,11 @@
+body {
+
+  color: #6fb2c5;
+}
+  
+.jumbotron {
+  background-image: url("../images/swd1.jpg");
+  background-size: 100% 100%;
+  text-align: left;
+  font-family: "Lucida Handwriting", "Brush Script MT";
+} 
