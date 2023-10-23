@@ -17,18 +17,18 @@ app = Flask(__name__)
 # Set CORS to accept any and all traffic (mostly for convenience)
 cors = CORS(app)
 
-# A route for pulling data based on a trip's ID number
-@app.route("/data/<trip_id>",methods=['GET','POST'])
+# A route for pulling data based on a user's ID number
+@app.route("/data/<user_id>",methods=['GET','POST'])
 @app.route("/data",methods=['GET','POST'])
-def tripData(trip_id=None):
+def userData(user_id=None):
 
    # Establish the connection to the database
    db_string = f"postgresql://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}"
    engine = create_engine(db_string)
    
-   if trip_id:
-      # Select the rows with the desired trip ID
-      data = pd.read_sql(f"SELECT * FROM {db_table} WHERE trip_id='{trip_id}' ", con=engine)
+   if user_id:
+      # Select the rows with the desired user ID
+      data = pd.read_sql(f"SELECT * FROM {db_table} WHERE user_id='{user_id}' ", con=engine)
    else:
       # If no selection is made, it should be during the init() function call and pull all data from the table to populate the dropdown
       data = pd.read_sql(f"SELECT * FROM {db_table} ", con=engine)
