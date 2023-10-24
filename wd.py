@@ -18,7 +18,7 @@ app = Flask(__name__)
 cors = CORS(app)
 
 # A route for pulling data based on a user's ID number
-@app.route("/data/<user_id>",methods=['GET','POST'])
+# @app.route("/data/<user_id>",methods=['GET','POST'])
 @app.route("/data",methods=['GET','POST'])
 def userData(user_id=None):
 
@@ -34,7 +34,7 @@ def userData(user_id=None):
       data = pd.read_sql(f"SELECT * FROM {db_table} ", con=engine)
 
    # Set the index to be the time_stamp column   
-   data.set_index("time_stamp")
+   data.set_index("entry_date")
 
    # Avoid having to_csv add an index column when the data gets passed
    return data.to_csv(index=False)

@@ -28,46 +28,46 @@ function init() {
     buildUserChart(firstUser);
   });
 
-  // Grab a reference to the dropdown select element
-  var airportSelector = d3.select("#selectAirportData");
+//   // Grab a reference to the dropdown select element
+//   var airportSelector = d3.select("#selectAirportData");
 
-  d3.csv(dataLink).then((data) => {
+//   d3.csv(dataLink).then((data) => {
     
-    // Pull in all itinerary airport codes and make a unique set for the dropdown
-    var airportIDs = data.map(d => d.depart_airport +"-"+ d.return_airport);
-    var uniqueAirports = new Set(airportIDs);
+//     // Pull in all itinerary airport codes and make a unique set for the dropdown
+//     var airportIDs = data.map(d => d.depart_airport +"-"+ d.return_airport);
+//     var uniqueAirports = new Set(airportIDs);
     
-    // Populate the dropdown with all airport IDs
-    uniqueAirports.forEach((airportIDs) => {
-      airportSelector
-      .append("option")
-      .text(airportIDs)
-      .property("value", airportIDs);
-    });
+//     // Populate the dropdown with all airport IDs
+//     uniqueAirports.forEach((airportIDs) => {
+//       airportSelector
+//       .append("option")
+//       .text(airportIDs)
+//       .property("value", airportIDs);
+//     });
 
-    // Use the first sample from the list to build the initial plots
-    var firstAirport = airportIDs[0];
+//     // Use the first sample from the list to build the initial plots
+//     var firstAirport = airportIDs[0];
     
-    buildTimeChart(firstAirport);
-  });
+//     buildTimeChart(firstAirport);
+//   });
 }
 
 // Initialize the dashboard
 init();
   
-function optionOneChanged(newUser) {
+function optionOneChanged(currentUser) {
   // Fetch new data each time a new sample is selected
-  buildUserChart(newUser);
+  buildUserChart(currentUser);
 }
 
-function optionTwoChanged(newUser) {
-  // Fetch new data each time a new sample is selected
-  buildTimeChart(newUser);
-}
+// function optionTwoChanged(currentUser) {
+//   // Fetch new data each time a new sample is selected
+//   buildTimeChart(currentUser);
+// }
 
-function buildUserChart(newUser) {
+function buildUserChart(currentUser) {
   
-  d3.csv(dataLink+"/"+newUser).then((data) => {
+  d3.csv(dataLink).then((data) => {
     // Get the user IDs for the plot title
     var userIDs = data.map(d => d.user_id);
     // Pull in the timestamps for when the data were collected
@@ -90,39 +90,39 @@ function buildUserChart(newUser) {
       }
     };
 
-    Plotly.newPlot("plotArea",lineData,lineLayout)
+    Plotly.newPlot("plotArea1",lineData,lineLayout)
   });
 }
 
-function buildTimeChart(newUserAirports) {
+// function buildTimeChart(newUserAirports) {
   
-  d3.csv(timeLink+"/"+newUserAirports).then((data) => {
-    // 3. Create a variable that holds the samples array. 
-    var daysBeforePurchase = data.map(d => d.days_before_purchase);
-    // var userIDs = data.map(d => d.user_id);
-    var airportIDs = data.map(d => d.depart_airport +"-"+ d.return_airport);
-    // var collectionTime = data.map(d => d.time_stamp);
-    var totalCost = data.map(d => d.total_cost);
-    // console.log(totalCost);
+//   d3.csv(timeLink+"/"+newUserAirports).then((data) => {
+//     // 3. Create a variable that holds the samples array. 
+//     var daysBeforePurchase = data.map(d => d.days_before_purchase);
+//     // var userIDs = data.map(d => d.user_id);
+//     var airportIDs = data.map(d => d.depart_airport +"-"+ d.return_airport);
+//     // var collectionTime = data.map(d => d.time_stamp);
+//     var totalCost = data.map(d => d.total_cost);
+//     // console.log(totalCost);
     
-    // Set the chart type and data to be utilized
-    var scatterData = [{
-      x: daysBeforePurchase,
-      y: totalCost,
-      text: airportIDs,
-      mode: 'markers',
-      type: "scatter",
-    }];
+//     // Set the chart type and data to be utilized
+//     var scatterData = [{
+//       x: daysBeforePurchase,
+//       y: totalCost,
+//       text: airportIDs,
+//       mode: 'markers',
+//       type: "scatter",
+//     }];
 
-    // Create the layout for the bar chart. 
-    var barLayout = {
-      title: String(airportIDs[0]),
-      yaxis: {
-          range: [0,Math.max(totalCost)+25]
-      }
-    };
+//     // Create the layout for the bar chart. 
+//     var barLayout = {
+//       title: String(airportIDs[0]),
+//       yaxis: {
+//           range: [0,Math.max(totalCost)+25]
+//       }
+//     };
 
-    // Use Plotly to plot the data with the layout. 
-    Plotly.newPlot("plotArea2",scatterData,barLayout)
-  });
-}
+//     // Use Plotly to plot the data with the layout. 
+//     Plotly.newPlot("plotArea2",scatterData,barLayout)
+//   });
+// }
